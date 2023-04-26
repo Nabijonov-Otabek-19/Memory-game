@@ -61,7 +61,4 @@ dependencies {
 
     // lifeCycle
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
-
-    // Better Logging In Android Using Timber
-    implementation 'com.jakewharton.timber:timber:5.0.1'
 }

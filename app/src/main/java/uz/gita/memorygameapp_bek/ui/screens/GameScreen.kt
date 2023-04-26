@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -34,10 +36,16 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private lateinit var second: ImageView
     private var step = 0
     private var attempt = 0
+    private var isCompl = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         defLevel = args.level
 
+        resizeImages()
+        //  viewTreeObserver
+    }
+
+    private fun resizeImages() {
         binding.space.post {
             _height = binding.container.height / defLevel.verCount
             _width = binding.container.width / defLevel.horCount
@@ -45,10 +53,14 @@ class GameScreen : Fragment(R.layout.screen_game) {
             val list = repository.getData(count)
             describeCardData(list)
         }
-        //  viewTreeObserver
     }
 
     private fun describeCardData(list: List<CardData>) {
+        binding.attempt.text = "0"
+        binding.container.removeAllViews()
+        images.clear()
+        isCompl = 0
+
         for (i in 0 until defLevel.horCount) {
             for (j in 0 until defLevel.verCount) {
                 val image = ImageView(requireContext())
@@ -80,31 +92,35 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private fun addClickListener() {
         images.forEach { imageView ->
             imageView.setOnClickListener {
-                val bool = (it as ImageView).drawable.constantState ==
+                val isSame = (it as ImageView).drawable.constantState ==
                         ContextCompat.getDrawable(
                             requireContext(),
                             R.drawable.image_back
                         )?.constantState
 
-                if (bool) {
+                if (isSame) {
                     open(it)
                     step++
-                    if (step == 1) {
-                        first = it
-                    }
-                    else if (step == 2){
+                    if (step == 1) first = it
+                    else if (step == 2) {
                         second = it
                         step = 0
                         if ((first.tag as CardData).id == (second.tag as CardData).id) {
                             binding.attempt.text = (++attempt).toString()
-                            //if (!isComplete()) showDialog()
-                        }
-                        else {
+                            isCompl += 2
+
+                            if (isCompl == images.size) {
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    showDialog()
+                                }, 500)
+                            }
+
+                        } else {
                             Handler(Looper.getMainLooper()).postDelayed({
                                 binding.attempt.text = (++attempt).toString()
                                 close(first)
                                 close(second)
-                            }, 1000)
+                            }, 900)
                         }
                     }
                 } else {
@@ -116,9 +132,19 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
     private fun showDialog() {
         val dialog = Dialog(requireContext())
+
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window!!.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+
+        val window = dialog.window
+        window!!.attributes = lp
+
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.custom_win_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         val btnHome: AppCompatButton = dialog.findViewById(R.id.btnHome)
         val btnRestart: AppCompatButton = dialog.findViewById(R.id.btnRestart)
@@ -126,26 +152,11 @@ class GameScreen : Fragment(R.layout.screen_game) {
         btnHome.setOnClickListener { dialog.dismiss() }
 
         btnRestart.setOnClickListener {
-            val list = repository.getData(attempt)
-            describeCardData(list)
+            resizeImages()
             dialog.dismiss()
         }
         dialog.create()
         dialog.show()
-    }
-
-    private fun isComplete(): Boolean {
-        var imageBack = true
-        images.forEach { imageView ->
-            imageView.setOnClickListener {
-                imageBack = (it as ImageView).drawable.constantState ==
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.image_back
-                        )?.constantState
-            }
-        }
-        return imageBack
     }
 
     private fun open(imageView: ImageView) {
