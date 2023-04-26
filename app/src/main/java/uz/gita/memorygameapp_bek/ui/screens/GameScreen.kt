@@ -3,19 +3,19 @@ package uz.gita.memorygameapp_bek.ui.screens
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginLeft
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import uz.gita.memorygameapp_bek.R
 import uz.gita.memorygameapp_bek.data.CardData
 import uz.gita.memorygameapp_bek.data.LevelEnum
-import uz.gita.memorygameapp_bek.repository.AppRepository
-import uz.gita.memorygameapp_bek.R
 import uz.gita.memorygameapp_bek.databinding.ScreenGameBinding
+import uz.gita.memorygameapp_bek.repository.AppRepository
 
 class GameScreen : Fragment(R.layout.screen_game) {
+
     private val binding: ScreenGameBinding by viewBinding(ScreenGameBinding::bind)
     private var defLevel = LevelEnum.EASY
     private val args by navArgs<GameScreenArgs>()
@@ -69,21 +69,49 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private fun addClickListener() {
         images.forEach { imageView ->
             imageView.setOnClickListener {
-                imageView.animate()
-                    .setDuration(500)
-                    .rotationY(89f)
-                    .withEndAction {
-                        val data = it.tag as CardData
-                        imageView.setImageResource(data.imgRes)
-                        imageView.rotationY = -89f
-                        imageView.animate()
-                            .setDuration(500)
-                            .rotationY(0f)
-                            .withEndAction {
-                                //Toast.makeText(requireContext(), data.id.toString(), Toast.LENGTH_SHORT).show()
-                            }.start()
-                    }.start()
+                val bool = (it as ImageView).drawable.constantState ==
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.image_back
+                        )?.constantState
+
+                if (bool) open(it)
+                else close(it)
             }
         }
+    }
+
+    private fun open(imageView: ImageView) {
+        imageView.animate()
+            .setDuration(500)
+            .rotationY(89f)
+            .withEndAction {
+                val data = imageView.tag as CardData
+                imageView.setImageResource(data.imgRes)
+                imageView.rotationY = -89f
+                imageView.animate()
+                    .setDuration(500)
+                    .rotationY(0f)
+                    .withEndAction {
+                        //Toast.makeText(requireContext(), data.id.toString(), Toast.LENGTH_SHORT).show()
+                    }.start()
+            }.start()
+    }
+
+    private fun close(imageView: ImageView) {
+        imageView.animate()
+            .setDuration(500)
+            .rotationY(91f)
+            .withEndAction {
+                val data = imageView.tag as CardData
+                imageView.setImageResource(R.drawable.image_back)
+                imageView.rotationY = 89f
+                imageView.animate()
+                    .setDuration(500)
+                    .rotationY(0f)
+                    .withEndAction {
+                        //Toast.makeText(requireContext(), data.id.toString(), Toast.LENGTH_SHORT).show()
+                    }.start()
+            }.start()
     }
 }
