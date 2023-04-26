@@ -100,6 +100,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
                 if (isSame) {
                     open(it)
+
                     step++
                     if (step == 1) first = it
                     else if (step == 2) {
@@ -123,8 +124,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
                             }, 900)
                         }
                     }
-                } else {
-                    close(it)
                 }
             }
         }
