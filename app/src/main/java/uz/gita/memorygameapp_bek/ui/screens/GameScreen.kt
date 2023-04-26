@@ -112,6 +112,13 @@ class GameScreen : Fragment(R.layout.screen_game) {
                             isCompl += 2
                             step = 0
 
+                            // bir xil image larni ko'rinmas qiladi
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                first.visibility = View.INVISIBLE
+                                second.visibility = View.INVISIBLE
+                            }, 1000)
+
+                            // image lar qolmasa dialog chiqadi
                             if (isCompl == images.size) {
                                 Handler(Looper.getMainLooper()).postDelayed({
                                     showDialog()
@@ -119,6 +126,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
                             }
 
                         } else {
+                            // 2ta bosilgan image bir xil bo'masa, yopadi
                             Handler(Looper.getMainLooper()).postDelayed({
                                 binding.attempt.text = (++attempt).toString()
                                 close(first)
