@@ -4,7 +4,18 @@ import uz.gita.memorygameapp_bek.R
 import uz.gita.memorygameapp_bek.data.CardData
 
 class AppRepository {
-    // singleton
+
+    companion object {
+        private lateinit var instance: AppRepository
+
+        fun getInstance(): AppRepository {
+            if (!(::instance.isInitialized)) {
+                instance = AppRepository()
+            }
+            return instance
+        }
+    }
+
     private val cardList = ArrayList<CardData>()
 
     init {
@@ -35,13 +46,14 @@ class AppRepository {
         cardList.add(CardData(R.drawable.image_25, 25))
     }
 
-    fun getData(count: Int) : List<CardData> {
+    fun getData(count: Int): List<CardData> {
         cardList.shuffle()
-        val ls = cardList.subList(0,count / 2)
+        val list = cardList.subList(0, count / 2)
         val result = ArrayList<CardData>(count)
-        result.addAll(ls)
-        result.addAll(ls)
+        result.addAll(list)
+        result.addAll(list)
         result.shuffle()
+
         return result
     }
 }

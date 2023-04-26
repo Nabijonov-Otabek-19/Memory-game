@@ -10,17 +10,22 @@ import uz.gita.memorygameapp_bek.R
 import uz.gita.memorygameapp_bek.databinding.ScreenLevelBinding
 
 class LevelScreen : Fragment(R.layout.screen_level) {
-    private val binding : ScreenLevelBinding by viewBinding(ScreenLevelBinding::bind)
+    private val binding: ScreenLevelBinding by viewBinding(ScreenLevelBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.easy.setOnClickListener {
-            openGameScreen(LevelEnum.EASY)
-        }
-        binding.medium.setOnClickListener {
-            openGameScreen(LevelEnum.MEDIUM)
-        }
-        binding.hard.setOnClickListener {
-            openGameScreen(LevelEnum.HARD)
+
+        binding.apply {
+            easy.setOnClickListener {
+                openGameScreen(LevelEnum.EASY)
+            }
+
+            medium.setOnClickListener {
+                openGameScreen(LevelEnum.MEDIUM)
+            }
+
+            hard.setOnClickListener {
+                openGameScreen(LevelEnum.HARD)
+            }
         }
     }
 
