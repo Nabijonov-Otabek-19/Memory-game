@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.gita.memorygameapp_bek.R
@@ -99,16 +100,17 @@ class GameScreen : Fragment(R.layout.screen_game) {
                         )?.constantState
 
                 if (isSame) {
-                    open(it)
-
                     step++
-                    if (step == 1) first = it
-                    else if (step == 2) {
+                    if (step == 1) {
+                        first = it
+                        open(it)
+                    } else if (step == 2) {
+                        open(it)
                         second = it
-                        step = 0
                         if ((first.tag as CardData).id == (second.tag as CardData).id) {
                             binding.attempt.text = (++attempt).toString()
                             isCompl += 2
+                            step = 0
 
                             if (isCompl == images.size) {
                                 Handler(Looper.getMainLooper()).postDelayed({
@@ -121,7 +123,8 @@ class GameScreen : Fragment(R.layout.screen_game) {
                                 binding.attempt.text = (++attempt).toString()
                                 close(first)
                                 close(second)
-                            }, 900)
+                                step = 0
+                            }, 800)
                         }
                     }
                 }
@@ -148,7 +151,10 @@ class GameScreen : Fragment(R.layout.screen_game) {
         val btnHome: AppCompatButton = dialog.findViewById(R.id.btnHome)
         val btnRestart: AppCompatButton = dialog.findViewById(R.id.btnRestart)
 
-        btnHome.setOnClickListener { dialog.dismiss() }
+        btnHome.setOnClickListener {
+            findNavController().popBackStack()
+            dialog.dismiss()
+        }
 
         btnRestart.setOnClickListener {
             resizeImages()
@@ -180,7 +186,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
             .setDuration(500)
             .rotationY(91f)
             .withEndAction {
-                val data = imageView.tag as CardData
                 imageView.setImageResource(R.drawable.image_back)
                 imageView.rotationY = 89f
                 imageView.animate()
