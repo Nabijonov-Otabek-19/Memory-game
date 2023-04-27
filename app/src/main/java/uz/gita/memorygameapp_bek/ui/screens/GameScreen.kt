@@ -1,5 +1,6 @@
 package uz.gita.memorygameapp_bek.ui.screens
 
+import android.animation.Animator
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,6 +13,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.animation.doOnStart
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,6 +24,8 @@ import uz.gita.memorygameapp_bek.data.CardData
 import uz.gita.memorygameapp_bek.data.LevelEnum
 import uz.gita.memorygameapp_bek.databinding.ScreenGameBinding
 import uz.gita.memorygameapp_bek.repository.AppRepository
+import uz.gita.memorygameapp_bek.utils.closeImage
+import uz.gita.memorygameapp_bek.utils.openImage
 
 class GameScreen : Fragment(R.layout.screen_game) {
 
@@ -33,11 +37,11 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private var _width = 0
     private val images = ArrayList<ImageView>()
 
-    private lateinit var first: ImageView
-    private lateinit var second: ImageView
     private var step = 0
     private var attempt = 0
     private var isCompl = 0
+
+    private val pair = ArrayList<ImageView>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         defLevel = args.level
@@ -101,20 +105,25 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 if (isSame) {
                     step++
                     if (step == 1) {
-                        first = it
+                        pair.add(it)
                         open(it)
                     } else if (step == 2) {
                         open(it)
-                        second = it
-                        if ((first.tag as CardData).id == (second.tag as CardData).id) {
+                        pair.add(it)
+                        val image1 = pair[0]
+                        val image2 = pair[1]
+
+                        val bool2 = (image1.tag as CardData).id == (image2.tag as CardData).id
+                        if (bool2) {
                             binding.attempt.text = (++attempt).toString()
                             isCompl += 2
-                            step = 0
 
                             // bir xil image larni ko'rinmas qiladi
                             Handler(Looper.getMainLooper()).postDelayed({
-                                first.visibility = View.INVISIBLE
-                                second.visibility = View.INVISIBLE
+                                image1.visibility = View.INVISIBLE
+                                image2.visibility = View.INVISIBLE
+                                pair.clear()
+                                step = 0
                             }, 1000)
 
                             // image lar qolmasa dialog chiqadi
@@ -128,13 +137,58 @@ class GameScreen : Fragment(R.layout.screen_game) {
                             // 2ta bosilgan image bir xil bo'masa, yopadi
                             Handler(Looper.getMainLooper()).postDelayed({
                                 binding.attempt.text = (++attempt).toString()
-                                close(first)
-                                close(second)
+                                pair.forEach { img ->
+                                    close(img)
+                                    pair.remove(img)
+                                }
                                 step = 0
                             }, 800)
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun addClickListener3() {
+        images.forEach { imageView ->
+            imageView.setOnClickListener {
+                if (pair.contains(imageView) || pair.size == 2) {
+                    return@setOnClickListener
+                }
+                open(it as ImageView)
+                pair.add(it)
+
+                imageView.openImage({
+                    binding.container.isClickable = false
+                    pair.add(imageView)
+                },
+                    {
+                        binding.container.isClickable = true
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            if (pair.size == 2) {
+                                val data1 = pair[0].tag as CardData
+                                val data2 = pair[1].tag as CardData
+                                if (data1 != data2) {
+                                    pair.forEach {
+                                        it.closeImage({ animator ->
+                                            binding.container.isClickable = false
+                                        }, { animator ->
+                                            pair.remove(it)
+                                            binding.container.isClickable = true
+                                        })
+                                    }
+                                } else {
+                                    pair.forEach {
+                                        it.animate().alpha(0.5f).start()
+                                        it.isClickable = false
+                                    }
+                                    pair.clear()
+                                }
+                            }
+                        }, 500)
+                    }
+                )
             }
         }
     }
