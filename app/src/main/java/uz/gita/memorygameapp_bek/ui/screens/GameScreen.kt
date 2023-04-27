@@ -43,7 +43,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
         defLevel = args.level
 
         resizeImages()
-        //  viewTreeObserver
     }
 
     private fun resizeImages() {
@@ -174,6 +173,9 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
     private fun open(imageView: ImageView) {
         imageView.animate()
+            .withStartAction {
+                binding.container.isClickable = false
+            }
             .setDuration(500)
             .rotationY(89f)
             .withEndAction {
@@ -184,13 +186,17 @@ class GameScreen : Fragment(R.layout.screen_game) {
                     .setDuration(500)
                     .rotationY(0f)
                     .withEndAction {
-                        //Toast.makeText(requireContext(), data.id.toString(), Toast.LENGTH_SHORT).show()
-                    }.start()
+                        binding.container.isClickable = true
+                    }
+                    .start()
             }.start()
     }
 
     private fun close(imageView: ImageView) {
         imageView.animate()
+            .withStartAction {
+                binding.container.isClickable = false
+            }
             .setDuration(500)
             .rotationY(91f)
             .withEndAction {
@@ -200,8 +206,9 @@ class GameScreen : Fragment(R.layout.screen_game) {
                     .setDuration(500)
                     .rotationY(0f)
                     .withEndAction {
-                        //Toast.makeText(requireContext(), data.id.toString(), Toast.LENGTH_SHORT).show()
-                    }.start()
+                        binding.container.isClickable = true
+                    }
+                    .start()
             }.start()
     }
 }
