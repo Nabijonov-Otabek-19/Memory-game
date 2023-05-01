@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -21,6 +22,8 @@ import uz.gita.memorygameapp_bek.data.CardData
 import uz.gita.memorygameapp_bek.data.LevelEnum
 import uz.gita.memorygameapp_bek.databinding.ScreenGameBinding
 import uz.gita.memorygameapp_bek.repository.AppRepository
+import uz.gita.memorygameapp_bek.utils.closeCardsTogether
+import uz.gita.memorygameapp_bek.utils.flipCard
 
 class GameScreen : Fragment(R.layout.screen_game) {
 
@@ -75,7 +78,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 image.tag = list[i * defLevel.verCount + j]
                 //  image.setImageResource(list[i* defLevel.verCount + j].imgRes)
                 image.setImageResource(R.drawable.image_back)
-                image.scaleType = ImageView.ScaleType.CENTER_CROP
                 image.animate()
                     .x(i * _width * 1f)
                     .y(j * _height * 1f)
@@ -90,53 +92,47 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private fun addClickListener() {
         images.forEach { imageView ->
             imageView.setOnClickListener {
+
                 if (pair.contains(imageView) || pair.size == 2) {
                     return@setOnClickListener
                 }
 
-                imageView.animate()
-                    .withStartAction {
-                        binding.container.isClickable = false
-                        pair.add(imageView)
-                    }
-                    .setDuration(500)
-                    .rotationY(89f)
-                    .withEndAction {
-                        val data = imageView.tag as CardData
-                        imageView.setImageResource(data.imgRes)
-                        imageView.rotationY = -89f
-                        imageView.animate()
-                            .setDuration(500)
-                            .rotationY(0f)
-                            .withEndAction {
-                                binding.container.isClickable = true
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    if (pair.size == 2) {
-                                        val data1 = pair[0].tag as CardData
-                                        val data2 = pair[1].tag as CardData
-                                        if (data1 != data2) {
-                                            binding.attempt.text = (++attempt).toString()
-                                            pair.forEach { close(it) }
-                                            pair.clear()
-                                        } else {
-                                            binding.attempt.text = (++attempt).toString()
-                                            pair.forEach {
-                                                it.animate().alpha(0.5f).start()
-                                                it.isClickable = false
-                                            }
-                                            pair.clear()
-                                            isCompl += 2
-                                            if (isCompl == images.size) {
-                                                Handler(Looper.getMainLooper()).postDelayed({
-                                                    showDialog()
-                                                }, 500)
-                                            }
-                                        }
-                                    }
-                                }, 800)
-                            }
-                            .start()
-                    }.start()
+                val data = imageView.tag as CardData
+                imageView.flipCard(data.imgRes)
+                pair.add(imageView)
+
+                binding.container.isClickable = false
+                checkImages()
+                binding.container.isClickable = true
+            }
+        }
+    }
+
+    private fun checkImages() {
+        if (pair.size == 2) {
+            val img1 = pair[0]
+            val img2 = pair[1]
+
+            pair.clear()
+
+            if ((img2.tag as CardData) == (img1.tag as CardData)) {
+                binding.attempt.text = (++attempt).toString()
+                isCompl += 2
+
+                img1.animate().alpha(0.5f).start()
+                img2.animate().alpha(0.5f).start()
+                img1.isClickable = false
+                img2.isClickable = false
+
+                if (isCompl == images.size) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        showDialog()
+                    }, 1000)
+                }
+
+            } else {
+                binding.attempt.text = (++attempt).toString()
+                closeCardsTogether(img1, img2)
             }
         }
     }
@@ -171,46 +167,5 @@ class GameScreen : Fragment(R.layout.screen_game) {
         }
         dialog.create()
         dialog.show()
-    }
-
-    private fun open(imageView: ImageView) {
-        imageView.animate()
-            .withStartAction {
-                binding.container.isClickable = false
-            }
-            .setDuration(500)
-            .rotationY(89f)
-            .withEndAction {
-                val data = imageView.tag as CardData
-                imageView.setImageResource(data.imgRes)
-                imageView.rotationY = -89f
-                imageView.animate()
-                    .setDuration(500)
-                    .rotationY(0f)
-                    .withEndAction {
-                        binding.container.isClickable = true
-                    }
-                    .start()
-            }.start()
-    }
-
-    private fun close(imageView: ImageView) {
-        imageView.animate()
-            .withStartAction {
-                binding.container.isClickable = false
-            }
-            .setDuration(500)
-            .rotationY(91f)
-            .withEndAction {
-                imageView.setImageResource(R.drawable.image_back)
-                imageView.rotationY = 89f
-                imageView.animate()
-                    .setDuration(500)
-                    .rotationY(0f)
-                    .withEndAction {
-                        binding.container.isClickable = true
-                    }
-                    .start()
-            }.start()
     }
 }
