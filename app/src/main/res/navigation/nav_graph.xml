@@ -21,7 +21,7 @@
         tools:layout="@layout/screen_game">
         <argument
             android:name="level"
-            app:argType="uz.gita.memorygameapp_bek.data.LevelEnum" />
+            app:argType="uz.gita.memorygameapp_bek.data.common.LevelEnum" />
         <argument
             android:name="sample"
             android:defaultValue="android"

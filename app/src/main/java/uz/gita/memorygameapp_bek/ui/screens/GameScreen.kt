@@ -48,8 +48,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
             reload.setOnClickListener {
                 resizeImages()
             }
-
-
         }
     }
 
@@ -94,7 +92,27 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 images.add(image)
             }
         }
+        closeImages()
         addClickListener()
+    }
+
+    private fun closeImages() {
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.container.isClickable = false
+            images.forEach {
+                val data = it.tag as CardData
+                it.flipCard(data.imgRes)
+            }
+        }, 500)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.container.isClickable = false
+            images.forEach {
+                it.flipCard(R.drawable.image_back)
+            }
+            binding.container.isClickable = true
+        }, 1800)
     }
 
     private fun addClickListener() {
