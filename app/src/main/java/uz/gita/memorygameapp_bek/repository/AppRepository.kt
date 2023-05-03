@@ -1,7 +1,7 @@
 package uz.gita.memorygameapp_bek.repository
 
 import uz.gita.memorygameapp_bek.R
-import uz.gita.memorygameapp_bek.data.CardData
+import uz.gita.memorygameapp_bek.data.common.CardData
 
 class AppRepository {
 

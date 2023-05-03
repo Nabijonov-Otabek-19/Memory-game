@@ -12,14 +12,13 @@ import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.gita.memorygameapp_bek.R
-import uz.gita.memorygameapp_bek.data.CardData
-import uz.gita.memorygameapp_bek.data.LevelEnum
+import uz.gita.memorygameapp_bek.data.common.CardData
+import uz.gita.memorygameapp_bek.data.common.LevelEnum
 import uz.gita.memorygameapp_bek.databinding.ScreenGameBinding
 import uz.gita.memorygameapp_bek.repository.AppRepository
 import uz.gita.memorygameapp_bek.utils.closeCardsTogether
@@ -44,6 +43,14 @@ class GameScreen : Fragment(R.layout.screen_game) {
         defLevel = args.level
 
         resizeImages()
+
+        binding.apply {
+            reload.setOnClickListener {
+                resizeImages()
+            }
+
+
+        }
     }
 
     private fun resizeImages() {
@@ -61,6 +68,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
         binding.container.removeAllViews()
         images.clear()
         isCompl = 0
+        attempt = 0
 
         for (i in 0 until defLevel.horCount) {
             for (j in 0 until defLevel.verCount) {

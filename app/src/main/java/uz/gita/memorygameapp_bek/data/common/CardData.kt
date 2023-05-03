@@ -1,4 +1,4 @@
-package uz.gita.memorygameapp_bek.data
+package uz.gita.memorygameapp_bek.data.common
 
 data class CardData(
     val imgRes: Int,
