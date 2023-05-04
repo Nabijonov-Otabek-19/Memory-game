@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 
-class SharedPref private constructor(private val context: Context) {
+class SharedPref private constructor() {
 
     companion object {
         @SuppressLint("StaticFieldLeak")
@@ -17,16 +17,16 @@ class SharedPref private constructor(private val context: Context) {
         private const val SHARED_PREF = "shared_pref"
         private const val MUSIC = "music"
 
-        fun getInstance(context: Context): SharedPref {
+        fun init(context: Context){
+            if (!(::sharedPref.isInitialized)) {
+                sharedPref = SharedPref()
+            }
+
             pref = context.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
             editor = pref.edit()
-
-
-            if (!(::sharedPref.isInitialized)) {
-                sharedPref = SharedPref(context)
-            }
-            return sharedPref
         }
+
+        fun getInstance() = sharedPref
     }
 
     var isMusic: Boolean
