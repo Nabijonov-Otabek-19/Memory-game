@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -49,6 +50,14 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 resizeImages()
             }
         }
+
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showQuitDialog()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
     }
 
     private fun resizeImages() {
@@ -97,7 +106,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
     }
 
     private fun closeImages() {
-
         Handler(Looper.getMainLooper()).postDelayed({
             binding.container.isClickable = false
             images.forEach {
@@ -152,7 +160,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
                 if (isCompl == images.size) {
                     Handler(Looper.getMainLooper()).postDelayed({
-                        showDialog()
+                        showWinDialog()
                     }, 1000)
                 }
 
@@ -163,7 +171,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
         }
     }
 
-    private fun showDialog() {
+    private fun showWinDialog() {
         val dialog = Dialog(requireContext())
 
         val lp = WindowManager.LayoutParams()
@@ -189,6 +197,37 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
         btnRestart.setOnClickListener {
             resizeImages()
+            dialog.dismiss()
+        }
+        dialog.create()
+        dialog.show()
+    }
+
+    private fun showQuitDialog() {
+        val dialog = Dialog(requireContext())
+
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window!!.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+
+        val window = dialog.window
+        window!!.attributes = lp
+
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_quit_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        val btnNo: AppCompatButton = dialog.findViewById(R.id.btnNo)
+        val btnYes: AppCompatButton = dialog.findViewById(R.id.btnYes)
+
+        btnNo.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnYes.setOnClickListener {
+            findNavController().popBackStack()
             dialog.dismiss()
         }
         dialog.create()
