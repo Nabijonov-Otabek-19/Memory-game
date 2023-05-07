@@ -15,16 +15,20 @@ class LevelScreen : Fragment(R.layout.screen_level) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.apply {
-            easy.setOnClickListener {
+            btnEasy.setOnClickListener {
                 openGameScreen(LevelEnum.EASY)
             }
 
-            medium.setOnClickListener {
+            btnMedium.setOnClickListener {
                 openGameScreen(LevelEnum.MEDIUM)
             }
 
-            hard.setOnClickListener {
+            btnHard.setOnClickListener {
                 openGameScreen(LevelEnum.HARD)
+            }
+
+            btnOption.setOnClickListener {
+
             }
         }
     }

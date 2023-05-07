@@ -7,37 +7,111 @@
     android:background="@drawable/bg1"
     tools:context=".ui.screens.LevelScreen">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/easy"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="80dp"
         android:layout_marginTop="30dp"
-        android:src="@drawable/easy"
+        android:scaleType="fitXY"
+        android:src="@drawable/level"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnEasy"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="Easy"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/amita"
+        app:layout_constraintBottom_toBottomOf="@id/easy"
+        app:layout_constraintLeft_toLeftOf="@id/easy"
+        app:layout_constraintRight_toRightOf="@id/easy"
+        app:layout_constraintTop_toTopOf="@id/easy" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/medium"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="80dp"
         android:layout_margin="8dp"
-        android:src="@drawable/medium"
+        android:scaleType="fitXY"
+        android:src="@drawable/level"
         app:layout_constraintBottom_toTopOf="@id/hard"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/easy" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnMedium"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:fontFamily="@font/amita"
+        android:gravity="center"
+        android:text="Medium"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/medium"
+        app:layout_constraintLeft_toLeftOf="@id/medium"
+        app:layout_constraintRight_toRightOf="@id/medium"
+        app:layout_constraintTop_toTopOf="@id/medium" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/hard"
-        android:layout_width="200dp"
+        android:layout_width="180dp"
         android:layout_height="80dp"
         android:layout_margin="8dp"
-        android:src="@drawable/hard"
+        android:scaleType="fitXY"
+        android:src="@drawable/level"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medium" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnHard"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:fontFamily="@font/amita"
+        android:gravity="center"
+        android:text="Hard"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/hard"
+        app:layout_constraintLeft_toLeftOf="@id/hard"
+        app:layout_constraintRight_toRightOf="@id/hard"
+        app:layout_constraintTop_toTopOf="@id/hard" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/option"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/level"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hard" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnOption"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:fontFamily="@font/amita"
+        android:gravity="center"
+        android:text="Options"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/option"
+        app:layout_constraintLeft_toLeftOf="@id/option"
+        app:layout_constraintRight_toRightOf="@id/option"
+        app:layout_constraintTop_toTopOf="@id/option" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

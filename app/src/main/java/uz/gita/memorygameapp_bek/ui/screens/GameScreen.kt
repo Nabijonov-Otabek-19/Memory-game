@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -179,8 +180,8 @@ class GameScreen : Fragment(R.layout.screen_game) {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        val btnHome: AppCompatButton = dialog.findViewById(R.id.btnHome)
-        val btnRestart: AppCompatButton = dialog.findViewById(R.id.btnRestart)
+        val btnHome: AppCompatTextView = dialog.findViewById(R.id.btnHome)
+        val btnRestart: AppCompatTextView = dialog.findViewById(R.id.btnRestart)
 
         btnHome.setOnClickListener {
             dialog.dismiss()
