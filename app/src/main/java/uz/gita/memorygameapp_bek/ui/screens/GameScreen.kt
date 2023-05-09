@@ -126,21 +126,21 @@ class GameScreen : Fragment(R.layout.screen_game) {
                     return@setOnClickListener
                 }
 
-                val data = imageView.tag as CardData
-                imageView.flipCard(data.imgRes)
-                pair.add(imageView)
-
-                checkImages()
+                if (imageView.rotationY == 0f) checkImages(imageView)
             }
         }
     }
 
-    private fun checkImages() {
+    private fun checkImages(imageView: ImageView) {
+        val data = imageView.tag as CardData
+        imageView.flipCard(data.imgRes)
+        pair.add(imageView)
+
         if (pair.size == 2) {
             val img1 = pair[0]
             val img2 = pair[1]
 
-            pair.clear()
+            enable(false)
 
             if ((img2.tag as CardData) == (img1.tag as CardData)) {
                 binding.attempt.text = "Attempt\n${++attempt}"
@@ -165,6 +165,14 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 binding.attempt.text = "Attempt\n${++attempt}"
                 closeCardsTogether(img1, img2)
             }
+            pair.clear()
+            enable(true)
+        }
+    }
+
+    private fun enable(bool: Boolean) {
+        images.forEach {
+            it.isEnabled = bool
         }
     }
 
