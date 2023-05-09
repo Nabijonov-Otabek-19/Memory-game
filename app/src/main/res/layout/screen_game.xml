@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/jungle1"
+    android:background="@drawable/menu_frame"
     android:splitMotionEvents="false"
     tools:context=".ui.screens.GameScreen">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/step_bg"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/timer_bg"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/levelNumber"
+        app:layout_constraintRight_toLeftOf="@id/attemptBg"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/step"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/amita"
         android:text="1"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -30,7 +31,7 @@
         app:layout_constraintRight_toRightOf="@id/step_bg"
         app:layout_constraintTop_toTopOf="@id/step_bg" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/reload"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -40,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/menu"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -50,84 +51,54 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-    <ImageView
-        android:id="@+id/setting"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:src="@drawable/setting"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/levelNumber"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
+        android:scaleType="fitXY"
         android:src="@drawable/level_bg2"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/step_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:fontFamily="@font/amita"
+        android:text="Level\n1/10"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/levelNumber"
         app:layout_constraintLeft_toLeftOf="@id/levelNumber"
         app:layout_constraintRight_toRightOf="@id/levelNumber"
-        app:layout_constraintTop_toTopOf="@id/levelNumber">
+        app:layout_constraintTop_toTopOf="@id/levelNumber" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Level"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/levelText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="1/10"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/attemptBg"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
+        android:scaleType="fitXY"
         android:src="@drawable/level_bg2"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/step_bg"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/rightContainer"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/attempt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:fontFamily="@font/amita"
+        android:gravity="center"
+        android:text="Attempt\n0"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/attemptBg"
         app:layout_constraintLeft_toLeftOf="@id/attemptBg"
         app:layout_constraintRight_toRightOf="@id/attemptBg"
-        app:layout_constraintTop_toTopOf="@id/attemptBg">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Attempt"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/attempt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="@id/attemptBg" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/space"
@@ -138,7 +109,7 @@
         app:layout_constraintBottom_toTopOf="@id/reload"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rightContainer">
+        app:layout_constraintTop_toBottomOf="@id/levelNumber">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container"

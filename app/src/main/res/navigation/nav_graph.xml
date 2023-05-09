@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_levelScreen_to_gameScreen"
             app:destination="@id/gameScreen" />
+        <action
+            android:id="@+id/action_levelScreen_to_optionScreen"
+            app:destination="@id/optionScreen" />
     </fragment>
     <fragment
         android:id="@+id/gameScreen"
@@ -27,4 +30,10 @@
             android:defaultValue="android"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        tools:layout="@layout/screen_option"
+        android:id="@+id/optionScreen"
+        android:name="uz.gita.memorygameapp_bek.ui.screens.OptionScreen"
+        android:label="OptionScreen" />
 </navigation>

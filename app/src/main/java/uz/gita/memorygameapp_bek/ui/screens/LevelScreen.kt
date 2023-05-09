@@ -28,7 +28,7 @@ class LevelScreen : Fragment(R.layout.screen_level) {
             }
 
             btnOption.setOnClickListener {
-
+                findNavController().navigate(LevelScreenDirections.actionLevelScreenToOptionScreen())
             }
         }
     }
@@ -36,5 +36,4 @@ class LevelScreen : Fragment(R.layout.screen_level) {
     private fun openGameScreen(level: LevelEnum) {
         findNavController().navigate(LevelScreenDirections.actionLevelScreenToGameScreen(level))
     }
-
 }

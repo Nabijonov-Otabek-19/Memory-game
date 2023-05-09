@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -94,13 +93,12 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 images.add(image)
             }
         }
-        closeImages()
+        openAndCloseImages()
         addClickListener()
     }
 
-    private fun closeImages() {
+    private fun openAndCloseImages() {
         Handler(Looper.getMainLooper()).postDelayed({
-            binding.container.isClickable = false
             images.forEach {
                 val data = it.tag as CardData
                 it.flipCard(data.imgRes)
@@ -108,11 +106,9 @@ class GameScreen : Fragment(R.layout.screen_game) {
         }, 500)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            binding.container.isClickable = false
             images.forEach {
                 it.flipCard(R.drawable.back)
             }
-            binding.container.isClickable = true
         }, 1800)
     }
 
@@ -128,9 +124,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 imageView.flipCard(data.imgRes)
                 pair.add(imageView)
 
-                binding.container.isClickable = false
                 checkImages()
-                binding.container.isClickable = true
             }
         }
     }
