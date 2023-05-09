@@ -4,32 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_frame"
+    android:background="@drawable/new_game_btn"
     android:splitMotionEvents="false"
     tools:context=".ui.screens.GameScreen">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/step_bg"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/timer_bg"
-        app:layout_constraintLeft_toRightOf="@id/levelNumber"
-        app:layout_constraintRight_toLeftOf="@id/attemptBg"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/step"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/amita"
-        android:text="1"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/step_bg"
-        app:layout_constraintLeft_toLeftOf="@id/step_bg"
-        app:layout_constraintRight_toRightOf="@id/step_bg"
-        app:layout_constraintTop_toTopOf="@id/step_bg" />
+        android:id="@+id/reloadbg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/reload_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/reload"
@@ -40,6 +25,14 @@
         android:src="@drawable/reload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/reloadbg2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/reload_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/menu"
@@ -59,7 +52,7 @@
         android:src="@drawable/level_bg2"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/step_bg"
+        app:layout_constraintRight_toLeftOf="@id/attemptBg"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -82,7 +75,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/level_bg2"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toRightOf="@id/step_bg"
+        app:layout_constraintLeft_toRightOf="@id/levelNumber"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

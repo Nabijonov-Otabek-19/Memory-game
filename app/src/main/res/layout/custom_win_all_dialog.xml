@@ -15,7 +15,7 @@
         android:fontFamily="@font/amita"
         android:gravity="center"
         android:padding="4dp"
-        android:text="Congratulations"
+        android:text="Completed Easy level"
         android:textColor="@color/white"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -35,14 +35,14 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgHome"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="80dp"
         android:layout_marginBottom="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/imgRestart"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -61,35 +61,5 @@
         app:layout_constraintLeft_toLeftOf="@id/imgHome"
         app:layout_constraintRight_toRightOf="@id/imgHome"
         app:layout_constraintTop_toTopOf="@id/imgHome" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgRestart"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="16dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/button"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/imgHome"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/btnNext"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="?android:selectableItemBackground"
-        android:fontFamily="@font/amita"
-        android:gravity="center"
-        android:text="Next"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/imgRestart"
-        app:layout_constraintLeft_toLeftOf="@id/imgRestart"
-        app:layout_constraintRight_toRightOf="@id/imgRestart"
-        app:layout_constraintTop_toTopOf="@id/imgRestart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

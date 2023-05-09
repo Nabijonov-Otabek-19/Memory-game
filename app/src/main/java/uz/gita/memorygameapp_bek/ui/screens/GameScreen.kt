@@ -35,6 +35,8 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private val images = ArrayList<ImageView>()
 
     private var attempt = 0
+    private var level = 1
+    private var totalLevel = 5
     private var isCompl = 0
 
     private val pair = ArrayList<ImageView>()
@@ -42,6 +44,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         defLevel = args.level
 
+        level = 1
         resizeImages()
 
         binding.apply {
@@ -63,7 +66,8 @@ class GameScreen : Fragment(R.layout.screen_game) {
     }
 
     private fun describeCardData(list: List<CardData>) {
-        binding.attempt.text = "0"
+        binding.txtLevel.text = "Level\n$level/$totalLevel"
+        binding.attempt.text = "Attemp\n0"
         binding.container.removeAllViews()
         images.clear()
         isCompl = 0
@@ -100,6 +104,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private fun openAndCloseImages() {
         Handler(Looper.getMainLooper()).postDelayed({
             images.forEach {
+                it.isEnabled = false
                 val data = it.tag as CardData
                 it.flipCard(data.imgRes)
             }
@@ -108,6 +113,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
         Handler(Looper.getMainLooper()).postDelayed({
             images.forEach {
                 it.flipCard(R.drawable.back1)
+                it.isEnabled = true
             }
         }, 1800)
     }
@@ -137,7 +143,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
             pair.clear()
 
             if ((img2.tag as CardData) == (img1.tag as CardData)) {
-                binding.attempt.text = (++attempt).toString()
+                binding.attempt.text = "Attempt\n${++attempt}"
                 isCompl += 2
 
                 img1.animate().alpha(0.5f).start()
@@ -145,14 +151,18 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 img1.isClickable = false
                 img2.isClickable = false
 
-                if (isCompl == images.size) {
+                if (isCompl == images.size && level == totalLevel) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        showWinAllDialog()
+                    }, 1000)
+                } else if (isCompl == images.size && level != totalLevel) {
                     Handler(Looper.getMainLooper()).postDelayed({
                         showWinDialog()
                     }, 1000)
                 }
 
             } else {
-                binding.attempt.text = (++attempt).toString()
+                binding.attempt.text = "Attempt\n${++attempt}"
                 closeCardsTogether(img1, img2)
             }
         }
@@ -175,16 +185,43 @@ class GameScreen : Fragment(R.layout.screen_game) {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         val btnHome: AppCompatTextView = dialog.findViewById(R.id.btnHome)
-        val btnRestart: AppCompatTextView = dialog.findViewById(R.id.btnRestart)
+        val btnNext: AppCompatTextView = dialog.findViewById(R.id.btnNext)
 
         btnHome.setOnClickListener {
             dialog.dismiss()
             findNavController().popBackStack()
         }
 
-        btnRestart.setOnClickListener {
+        btnNext.setOnClickListener {
+            level++
             resizeImages()
             dialog.dismiss()
+        }
+        dialog.create()
+        dialog.show()
+    }
+
+    private fun showWinAllDialog() {
+        val dialog = Dialog(requireActivity())
+
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window!!.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+
+        val window = dialog.window
+        window!!.attributes = lp
+
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_win_all_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        val btnHome: AppCompatTextView = dialog.findViewById(R.id.btnHome)
+
+        btnHome.setOnClickListener {
+            dialog.dismiss()
+            findNavController().popBackStack()
         }
         dialog.create()
         dialog.show()
