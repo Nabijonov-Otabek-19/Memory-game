@@ -78,13 +78,13 @@ class GameScreen : Fragment(R.layout.screen_game) {
                     width = _width
                     height = _height
                 }
-                lp.setMargins(4, 4, 4, 4)
+                lp.setMargins(2, 2, 2, 2)
 //                image.x = i * _width * 1f
 //                image.y = j * _height * 1f
                 image.layoutParams = lp
                 image.tag = list[i * defLevel.verCount + j]
                 //  image.setImageResource(list[i* defLevel.verCount + j].imgRes)
-                image.setImageResource(R.drawable.back)
+                image.setImageResource(R.drawable.back1)
                 image.animate()
                     .x(i * _width * 1f)
                     .y(j * _height * 1f)
@@ -107,7 +107,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
         Handler(Looper.getMainLooper()).postDelayed({
             images.forEach {
-                it.flipCard(R.drawable.back)
+                it.flipCard(R.drawable.back1)
             }
         }, 1800)
     }

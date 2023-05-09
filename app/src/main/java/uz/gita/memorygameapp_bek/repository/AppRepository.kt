@@ -19,11 +19,11 @@ class AppRepository {
     private val cardList = ArrayList<CardData>()
 
     init {
-        cardList.add(CardData(R.drawable.image_1, 1))
-        cardList.add(CardData(R.drawable.image_2, 2))
-        cardList.add(CardData(R.drawable.image_3, 3))
-        cardList.add(CardData(R.drawable.image_4, 4))
-        cardList.add(CardData(R.drawable.image_5, 5))
+        cardList.add(CardData(R.drawable.image1, 1))
+        cardList.add(CardData(R.drawable.image2, 2))
+        cardList.add(CardData(R.drawable.image3, 3))
+        cardList.add(CardData(R.drawable.image4, 4))
+        cardList.add(CardData(R.drawable.image5, 5))
         cardList.add(CardData(R.drawable.image_6, 6))
         cardList.add(CardData(R.drawable.image_7, 7))
         cardList.add(CardData(R.drawable.image_8, 8))

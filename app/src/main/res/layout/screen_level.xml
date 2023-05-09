@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btnEasy"
@@ -69,6 +69,7 @@
         android:layout_margin="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/level"
+        app:layout_constraintBottom_toTopOf="@id/expert"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medium" />
@@ -89,6 +90,33 @@
         app:layout_constraintTop_toTopOf="@id/hard" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/expert"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/level"
+        app:layout_constraintBottom_toTopOf="@id/option"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hard" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnExpert"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:fontFamily="@font/amita"
+        android:gravity="center"
+        android:text="Expert"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/expert"
+        app:layout_constraintLeft_toLeftOf="@id/expert"
+        app:layout_constraintRight_toRightOf="@id/expert"
+        app:layout_constraintTop_toTopOf="@id/expert" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/option"
         android:layout_width="180dp"
         android:layout_height="80dp"
@@ -97,7 +125,7 @@
         android:src="@drawable/level"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hard" />
+        app:layout_constraintTop_toBottomOf="@id/expert" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btnOption"

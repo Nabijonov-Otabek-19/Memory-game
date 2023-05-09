@@ -1,7 +1,8 @@
 package uz.gita.memorygameapp_bek.data.common
 
-enum class LevelEnum(val verCount: Int, val horCount :Int) {
-    EASY(4,3),
-    MEDIUM(6,4),
-    HARD(8,6)
+enum class LevelEnum(val verCount: Int, val horCount: Int) {
+    EASY(3, 2),
+    MEDIUM(4, 3),
+    HARD(5, 4),
+    EXPERT(6, 5)
 }

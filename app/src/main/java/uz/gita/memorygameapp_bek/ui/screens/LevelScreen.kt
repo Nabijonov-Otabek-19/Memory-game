@@ -27,6 +27,10 @@ class LevelScreen : Fragment(R.layout.screen_level) {
                 openGameScreen(LevelEnum.HARD)
             }
 
+            btnExpert.setOnClickListener {
+                openGameScreen(LevelEnum.EXPERT)
+            }
+
             btnOption.setOnClickListener {
                 findNavController().navigate(LevelScreenDirections.actionLevelScreenToOptionScreen())
             }

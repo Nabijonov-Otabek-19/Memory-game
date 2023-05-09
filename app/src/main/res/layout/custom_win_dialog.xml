@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/about"
+    android:background="@drawable/dialog"
     android:elevation="8dp"
     android:paddingVertical="24dp">
 
@@ -36,8 +36,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgHome"
         android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,6 +50,7 @@
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
+        android:background="?android:selectableItemBackground"
         android:fontFamily="@font/amita"
         android:gravity="center"
         android:text="Home"
@@ -64,8 +65,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgRestart"
         android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/button"
         android:textColor="@color/white"
@@ -79,6 +80,7 @@
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
+        android:background="?android:selectableItemBackground"
         android:fontFamily="@font/amita"
         android:gravity="center"
         android:text="Restart"

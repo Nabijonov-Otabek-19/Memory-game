@@ -44,7 +44,7 @@ fun ImageView.flipCard(
     }
 
     frontAnim.doOnEnd {
-        val resourceId = if (!onReverse) newImageResource else R.drawable.back
+        val resourceId = if (!onReverse) newImageResource else R.drawable.back1
         this.setImageResource(resourceId)
     }
 
@@ -106,13 +106,13 @@ fun closeCardsTogether(card1: ImageView, card2: ImageView, flipDuration: Long = 
     }
 
     frontAnimator1.doOnEnd {
-        val resourceId = R.drawable.back
+        val resourceId = R.drawable.back1
         card1.setImageResource(resourceId)
         card2.setImageResource(resourceId)
     }
 
     frontAnimator2.doOnEnd {
-        val resourceId = R.drawable.back
+        val resourceId = R.drawable.back1
         card1.setImageResource(resourceId)
         card2.setImageResource(resourceId)
     }
