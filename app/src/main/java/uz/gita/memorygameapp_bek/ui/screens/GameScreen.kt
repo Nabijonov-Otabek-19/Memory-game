@@ -36,7 +36,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
     private var attempt = 0
     private var level = 1
-    private var totalLevel = 5
+    private var totalLevel = 10
     private var isCompl = 0
 
     private val pair = ArrayList<ImageView>()
@@ -89,6 +89,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 image.tag = list[i * defLevel.verCount + j]
                 //  image.setImageResource(list[i* defLevel.verCount + j].imgRes)
                 image.setImageResource(R.drawable.back1)
+                image.isClickable = false
                 image.animate()
                     .x(i * _width * 1f)
                     .y(j * _height * 1f)
@@ -104,7 +105,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
     private fun openAndCloseImages() {
         Handler(Looper.getMainLooper()).postDelayed({
             images.forEach {
-                it.isEnabled = false
+                it.isClickable = false
                 val data = it.tag as CardData
                 it.flipCard(data.imgRes)
             }
@@ -113,7 +114,7 @@ class GameScreen : Fragment(R.layout.screen_game) {
         Handler(Looper.getMainLooper()).postDelayed({
             images.forEach {
                 it.flipCard(R.drawable.back1)
-                it.isEnabled = true
+                it.isClickable = true
             }
         }, 1800)
     }
@@ -140,16 +141,14 @@ class GameScreen : Fragment(R.layout.screen_game) {
             val img1 = pair[0]
             val img2 = pair[1]
 
-            enable(false)
-
             if ((img2.tag as CardData) == (img1.tag as CardData)) {
                 binding.attempt.text = "Attempt\n${++attempt}"
                 isCompl += 2
 
-                img1.animate().alpha(0.5f).start()
-                img2.animate().alpha(0.5f).start()
-                img1.isClickable = false
-                img2.isClickable = false
+                Handler(Looper.getMainLooper()).postDelayed({
+                    img1.visibility = View.GONE
+                    img2.visibility = View.GONE
+                }, 1000)
 
                 if (isCompl == images.size && level == totalLevel) {
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -166,13 +165,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 closeCardsTogether(img1, img2)
             }
             pair.clear()
-            enable(true)
-        }
-    }
-
-    private fun enable(bool: Boolean) {
-        images.forEach {
-            it.isEnabled = bool
         }
     }
 
