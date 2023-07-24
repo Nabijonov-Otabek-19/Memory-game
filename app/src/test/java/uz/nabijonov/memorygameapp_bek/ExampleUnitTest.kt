@@ -1,4 +1,4 @@
-package uz.gita.memorygameapp_bek
+package uz.nabijonov.memorygameapp_bek
 
 import org.junit.Test
 

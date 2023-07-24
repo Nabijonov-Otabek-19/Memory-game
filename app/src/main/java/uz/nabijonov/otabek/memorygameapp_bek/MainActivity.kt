@@ -1,8 +1,8 @@
-package uz.gita.memorygameapp_bek
+package uz.nabijonov.otabek.memorygameapp_bek
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import uz.gita.memorygameapp_bek.databinding.ActivityMainBinding
+import uz.nabijonov.otabek.memorygameapp_bek.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

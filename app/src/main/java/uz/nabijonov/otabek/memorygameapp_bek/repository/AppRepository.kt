@@ -1,7 +1,7 @@
-package uz.gita.memorygameapp_bek.repository
+package uz.nabijonov.otabek.memorygameapp_bek.repository
 
-import uz.gita.memorygameapp_bek.R
-import uz.gita.memorygameapp_bek.data.common.CardData
+import uz.nabijonov.otabek.memorygameapp_bek.R
+import uz.nabijonov.otabek.memorygameapp_bek.data.common.CardData
 
 class AppRepository {
 
@@ -9,7 +9,7 @@ class AppRepository {
         private lateinit var instance: AppRepository
 
         fun getInstance(): AppRepository {
-            if (!(::instance.isInitialized)) {
+            if (!(Companion::instance.isInitialized)) {
                 instance = AppRepository()
             }
             return instance

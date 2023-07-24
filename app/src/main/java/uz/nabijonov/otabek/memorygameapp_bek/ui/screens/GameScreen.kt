@@ -1,4 +1,4 @@
-package uz.gita.memorygameapp_bek.ui.screens
+package uz.nabijonov.otabek.memorygameapp_bek.ui.screens
 
 import android.app.Dialog
 import android.graphics.Color
@@ -16,13 +16,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import uz.gita.memorygameapp_bek.R
-import uz.gita.memorygameapp_bek.data.common.CardData
-import uz.gita.memorygameapp_bek.data.common.LevelEnum
-import uz.gita.memorygameapp_bek.databinding.ScreenGameBinding
-import uz.gita.memorygameapp_bek.repository.AppRepository
-import uz.gita.memorygameapp_bek.utils.closeCardsTogether
-import uz.gita.memorygameapp_bek.utils.flipCard
+import uz.nabijonov.otabek.memorygameapp_bek.R
+import uz.nabijonov.otabek.memorygameapp_bek.data.common.CardData
+import uz.nabijonov.otabek.memorygameapp_bek.data.common.LevelEnum
+import uz.nabijonov.otabek.memorygameapp_bek.databinding.ScreenGameBinding
+import uz.nabijonov.otabek.memorygameapp_bek.repository.AppRepository
+import uz.nabijonov.otabek.memorygameapp_bek.utils.closeCardsTogether
+import uz.nabijonov.otabek.memorygameapp_bek.utils.flipCard
 
 class GameScreen : Fragment(R.layout.screen_game) {
 

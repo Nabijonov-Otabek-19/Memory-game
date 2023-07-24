@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'uz.gita.memorygameapp_bek'
+    namespace 'uz.nabijonov.otabek.memorygameapp_bek'
     compileSdk 33
 
     defaultConfig {
-        applicationId "uz.gita.memorygameapp_bek"
+        applicationId "uz.nabijonov.otabek.memorygameapp_bek"
         minSdk 26
         targetSdk 33
         versionCode 1
@@ -50,8 +50,8 @@ dependencies {
 
 
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
 
     // viewBinding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9'

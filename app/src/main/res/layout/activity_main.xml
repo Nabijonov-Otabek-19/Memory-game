@@ -8,4 +8,4 @@
     android:layout_height="match_parent"
     app:defaultNavHost="true"
     app:navGraph="@navigation/nav_graph"
-    tools:context="uz.gita.memorygameapp_bek.MainActivity" />
+    tools:context="uz.nabijonov.otabek.memorygameapp_bek.MainActivity" />

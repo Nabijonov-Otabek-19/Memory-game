@@ -1,4 +1,4 @@
-package uz.gita.memorygameapp_bek.utils
+package uz.nabijonov.otabek.memorygameapp_bek.utils
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -7,7 +7,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import androidx.core.animation.doOnEnd
-import uz.gita.memorygameapp_bek.R
+import uz.nabijonov.otabek.memorygameapp_bek.R
 
 @SuppressLint("Recycle")
 fun ImageView.flipCard(

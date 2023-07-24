@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/levelScreen"
-        android:name="uz.gita.memorygameapp_bek.ui.screens.LevelScreen"
+        android:name="uz.nabijonov.otabek.memorygameapp_bek.ui.screens.LevelScreen"
         android:label="screen_level"
         tools:layout="@layout/screen_level">
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/gameScreen"
-        android:name="uz.gita.memorygameapp_bek.ui.screens.GameScreen"
+        android:name="uz.nabijonov.otabek.memorygameapp_bek.ui.screens.GameScreen"
         android:label="screen_game"
         tools:layout="@layout/screen_game">
         <argument
             android:name="level"
-            app:argType="uz.gita.memorygameapp_bek.data.common.LevelEnum" />
+            app:argType="uz.nabijonov.otabek.memorygameapp_bek.data.common.LevelEnum" />
         <argument
             android:name="sample"
             android:defaultValue="android"
@@ -34,6 +34,6 @@
     <fragment
         tools:layout="@layout/screen_option"
         android:id="@+id/optionScreen"
-        android:name="uz.gita.memorygameapp_bek.ui.screens.OptionScreen"
+        android:name="uz.nabijonov.otabek.memorygameapp_bek.ui.screens.OptionScreen"
         android:label="OptionScreen" />
 </navigation>

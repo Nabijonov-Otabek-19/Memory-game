@@ -1,4 +1,4 @@
-package uz.gita.memorygameapp_bek.data.common
+package uz.nabijonov.otabek.memorygameapp_bek.data.common
 
 enum class LevelEnum(val verCount: Int, val horCount: Int) {
     EASY(3, 2),
